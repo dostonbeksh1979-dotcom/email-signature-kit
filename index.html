@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Email Signature Kit — HTML signatures for Gmail, Apple Mail and Outlook</title>
+  <meta name="description" content="Fill in your details, pick a design and copy an HTML email signature that displays correctly in Gmail, Apple Mail, iPhone and Outlook.">
+  <link rel="icon" href="img/logo.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <p class="brand"><img src="img/logo.png" width="28" height="28" alt=""> Email Signature Kit</p>
+      <a class="header-link" href="#install">How to install</a>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="intro">
+      <h1>Email signatures that don't break</h1>
+      <p class="lead">Fill in your details, pick a design and copy it. Built the way email clients need it, so it looks the same in Gmail, Apple Mail, iPhone and Outlook.</p>
+    </section>
+
+    <div class="builder">
+      <!-- Details -->
+      <form class="panel details" id="details" novalidate aria-labelledby="details-title">
+        <h2 id="details-title">Your details</h2>
+        <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" type="text" autocomplete="name" value="Malika Rahimova"></div>
+        <div class="field"><label for="f-title">Job title</label><input id="f-title" name="title" type="text" autocomplete="organization-title" value="Head of Admissions"></div>
+        <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" type="text" autocomplete="organization" value="Ravon Academy"></div>
+        <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" value="+1 (202) 555-0147"></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" value="malika@example.com"></div>
+        <div class="field"><label for="f-website">Website</label><input id="f-website" name="website" type="text" inputmode="url" value="www.example.com"></div>
+        <div class="field"><label for="f-cta">Button text <span class="opt">(Modern design)</span></label><input id="f-cta" name="cta" type="text" value="Book a free trial lesson"></div>
+        <div class="field"><label for="f-cta-link">Button link</label><input id="f-cta-link" name="ctaLink" type="text" inputmode="url" value="https://dostonbeksh1979-dotcom.github.io/ravon-academy/#enroll"></div>
+
+        <fieldset class="field">
+          <legend>Accent colour</legend>
+          <div class="swatches">
+            <label class="swatch" style="--c:#0d7f7d"><input type="radio" name="accent" value="#0d7f7d" checked><span class="sr-only">Teal</span></label>
+            <label class="swatch" style="--c:#1f5a43"><input type="radio" name="accent" value="#1f5a43"><span class="sr-only">Green</span></label>
+            <label class="swatch" style="--c:#3d4fa3"><input type="radio" name="accent" value="#3d4fa3"><span class="sr-only">Indigo</span></label>
+            <label class="swatch" style="--c:#c4462b"><input type="radio" name="accent" value="#c4462b"><span class="sr-only">Coral</span></label>
+            <label class="swatch" style="--c:#222222"><input type="radio" name="accent" value="#222222"><span class="sr-only">Black</span></label>
+            <label class="swatch swatch-custom"><input type="color" id="f-custom" value="#7a3fb0" aria-label="Custom colour"></label>
+          </div>
+        </fieldset>
+        <label class="check"><input type="checkbox" id="f-logo" checked> Show logo</label>
+      </form>
+
+      <!-- Preview -->
+      <section class="panel preview" aria-labelledby="preview-title">
+        <div class="preview-top">
+          <h2 id="preview-title">Preview</h2>
+          <div class="seg" role="group" aria-label="Preview background">
+            <button type="button" data-mode="light" aria-pressed="true">Light</button>
+            <button type="button" data-mode="dark" aria-pressed="false">Dark mode</button>
+          </div>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Signature design">
+          <button type="button" role="tab" id="tab-classic" aria-selected="true" aria-controls="mail" data-design="classic">Classic</button>
+          <button type="button" role="tab" id="tab-modern" aria-selected="false" aria-controls="mail" data-design="modern" tabindex="-1">Modern</button>
+          <button type="button" role="tab" id="tab-minimal" aria-selected="false" aria-controls="mail" data-design="minimal" tabindex="-1">Minimal</button>
+        </div>
+
+        <div class="mail" id="mail" role="tabpanel" aria-labelledby="tab-classic">
+          <div class="mail-head">
+            <p><span>From</span> <b data-out="from">Malika Rahimova &lt;malika@example.com&gt;</b></p>
+            <p><span>Subject</span> Your trial lesson is booked</p>
+          </div>
+          <div class="mail-body">
+            <p>Hi Sarah,</p>
+            <p>Thanks for booking a trial lesson. See you on Thursday at 18:30.</p>
+            <p>Best regards,</p>
+            <div class="sig-scroll"><div id="sig-render"></div></div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn" type="button" id="copy-sig">Copy signature</button>
+          <button class="btn btn-ghost" type="button" id="copy-html">Copy HTML code</button>
+        </div>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+
+        <details class="code">
+          <summary>View HTML <span class="count" id="count"></span></summary>
+          <pre><code id="code"></code></pre>
+        </details>
+      </section>
+    </div>
+
+    <!-- Install -->
+    <section class="install" id="install" aria-labelledby="install-title">
+      <h2 id="install-title">How to install</h2>
+      <p class="section-sub">Press <b>Copy signature</b> first, then follow the steps for your email app.</p>
+      <div class="guides">
+        <details open>
+          <summary>Gmail</summary>
+          <ol>
+            <li>Open Gmail, click the gear icon, then <b>See all settings</b>.</li>
+            <li>On the <b>General</b> tab, scroll to <b>Signature</b> and click <b>Create new</b>.</li>
+            <li>Paste into the box (Ctrl+V or Cmd+V).</li>
+            <li>Under <b>Signature defaults</b>, choose it for new emails and replies.</li>
+            <li>Scroll to the bottom and click <b>Save Changes</b>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Apple Mail (Mac)</summary>
+          <ol>
+            <li>Open Mail, then <b>Mail → Settings → Signatures</b>.</li>
+            <li>Select your account and click <b>+</b>.</li>
+            <li>Untick <b>Always match my default message font</b>, otherwise Mail removes the formatting.</li>
+            <li>Paste into the right-hand box and close the window.</li>
+            <li>If the logo shows as a question mark, check that you're online: the logo loads from the web, so it isn't sent as an attachment.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iPhone and iPad</summary>
+          <ol>
+            <li>Open this page on your iPhone and tap <b>Copy signature</b>.</li>
+            <li>Go to <b>Settings → Apps → Mail → Signature</b> and paste.</li>
+            <li>If the formatting disappears, shake the iPhone straight after pasting and tap <b>Undo</b>. The formatted version comes back.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Outlook (new Outlook and outlook.com)</summary>
+          <ol>
+            <li>Open <b>Settings → Account → Signatures</b>.</li>
+            <li>Click <b>New signature</b>, give it a name and paste.</li>
+            <li>Choose it as the default for new messages and replies, then <b>Save</b>.</li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+    <!-- Why -->
+    <section class="why" aria-labelledby="why-title">
+      <h2 id="why-title">Why these signatures don't break</h2>
+      <ul class="why-list">
+        <li><b>Tables and inline styles.</b> It's the one layout method every email client agrees on. No flexbox, no CSS classes for Outlook to strip.</li>
+        <li><b>A hosted logo, not an attachment.</b> The PNG loads from the web with a fixed size, so it doesn't arrive as a file or blow up on phones.</li>
+        <li><b>Web-safe fonts.</b> Arial and Helvetica look the same everywhere; custom web fonts fall back to Times New Roman in Outlook.</li>
+        <li><b>Under Gmail's limit.</b> Gmail refuses signatures over 10,000 characters. The counter above keeps you inside it.</li>
+        <li><b>Tap to call and tap to email.</b> Phone and email are real links, so they work on a phone with one tap.</li>
+        <li><b>Visible in dark mode.</b> The logo sits on a solid circle, so it doesn't disappear when the inbox turns dark.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Portfolio demo by Dostonbek S. The person and contact details in the example are fictional. <a href="https://www.upwork.com/freelancers/~01d087c16ba1286fba">View Upwork profile</a></p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
