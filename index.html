@@ -54,10 +54,10 @@
             <li><strong data-count="10000" data-suffix="">10,000</strong><span>char limit checked</span></li>
           </ul>
         </div>
-        <div class="hero-cards" aria-hidden="true">
-          <div class="mini-card mc-1"><div data-mini="classic"></div></div>
-          <div class="mini-card mc-2"><div data-mini="modern"></div></div>
-          <div class="mini-card mc-3"><div data-mini="minimal"></div></div>
+        <div class="hero-cards" aria-hidden="true" data-cursor="Live">
+          <div class="mini-card mc-1" data-tilt="12"><div data-mini="classic"></div></div>
+          <div class="mini-card mc-2" data-tilt="12"><div data-mini="modern"></div></div>
+          <div class="mini-card mc-3" data-tilt="12"><div data-mini="minimal"></div></div>
         </div>
       </div>
     </section>
@@ -121,7 +121,7 @@
               <button type="button" role="tab" id="tab-minimal" aria-selected="false" aria-controls="mail" data-design="minimal" tabindex="-1">Minimal</button>
             </div>
 
-            <div class="mail-stage" id="stage">
+            <div class="mail-stage" id="stage" data-cursor="Tilt">
               <div class="mail" id="mail" role="tabpanel" aria-labelledby="tab-classic">
                 <div class="mail-bar" aria-hidden="true"><i></i><i></i><i></i><span>New message</span></div>
                 <div class="mail-head">
@@ -166,9 +166,9 @@
           <h2 id="inboxes-title" data-split="words">Same signature. Four email apps.</h2>
           <p class="sub">Your signature as Gmail, Apple Mail, iPhone and Outlook in dark mode show it. It updates as you type above.</p>
         </div>
-        <div class="track-viewport">
+        <div class="track-viewport" data-cursor="Scroll">
           <div class="tour-track" id="track">
-            <figure class="client client-gmail">
+            <figure class="client client-gmail" data-tilt="6">
               <div class="client-chrome"><span class="g-logo">Gmail</span><span class="g-search">Search mail</span><span class="g-avatar">S</span></div>
               <div class="client-body">
                 <p class="c-subject">Your trial lesson is booked</p>
@@ -178,7 +178,7 @@
               </div>
               <figcaption>Gmail · web</figcaption>
             </figure>
-            <figure class="client client-apple">
+            <figure class="client client-apple" data-tilt="6">
               <div class="client-chrome"><i></i><i></i><i></i><span>Inbox — iCloud</span></div>
               <div class="client-body">
                 <p class="c-from"><b>Malika Rahimova</b></p>
@@ -188,7 +188,7 @@
               </div>
               <figcaption>Apple Mail · Mac</figcaption>
             </figure>
-            <figure class="client client-iphone">
+            <figure class="client client-iphone" data-tilt="8">
               <div class="phone">
                 <div class="phone-top"><span>9:41</span><span class="notch"></span><span>5G</span></div>
                 <div class="client-body">
@@ -200,7 +200,7 @@
               </div>
               <figcaption>Mail · iPhone</figcaption>
             </figure>
-            <figure class="client client-outlook">
+            <figure class="client client-outlook" data-tilt="6">
               <div class="client-chrome"><span class="o-logo">Outlook</span><span class="o-tag">Dark mode</span></div>
               <div class="client-body">
                 <p class="c-subject">Your trial lesson is booked</p>
@@ -245,12 +245,12 @@
           <h2 id="why-title" data-split="words">Built for how email really renders</h2>
         </div>
         <ul class="why-grid">
-          <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 10h18M9 10v9"/></svg></span><b>Tables and inline styles</b><p>The one layout every email client agrees on. No flexbox, no classes for Outlook to strip.</p></li>
-          <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 16l4-4 3 3 5-6 4 5M4 4h16v16H4z"/></svg></span><b>Hosted logo, not an attachment</b><p>A PNG with a fixed size loads from the web, so it never arrives as a file.</p></li>
-          <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19L11 5h2l6 14M8 13h8"/></svg></span><b>Web-safe fonts</b><p>Arial and Helvetica look the same everywhere. Web fonts fall back to Times in Outlook.</p></li>
-          <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18h16M6 18V9M10 18V5M14 18v-7M18 18v-4"/></svg></span><b>Under Gmail's limit</b><p>Gmail refuses signatures over 10,000 characters. The meter keeps you inside it.</p></li>
-          <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h10v18H7zM11 18h2"/></svg></span><b>One tap on a phone</b><p>Phone and email are real links: tap to call, tap to write.</p></li>
-          <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"/></svg></span><b>Visible in dark mode</b><p>The logo sits on a solid circle, so it doesn't vanish in a dark inbox.</p></li>
+          <li class="why-card reveal" data-tilt="8"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 10h18M9 10v9"/></svg></span><b>Tables and inline styles</b><p>The one layout every email client agrees on. No flexbox, no classes for Outlook to strip.</p></li>
+          <li class="why-card reveal" data-tilt="8"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 16l4-4 3 3 5-6 4 5M4 4h16v16H4z"/></svg></span><b>Hosted logo, not an attachment</b><p>A PNG with a fixed size loads from the web, so it never arrives as a file.</p></li>
+          <li class="why-card reveal" data-tilt="8"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19L11 5h2l6 14M8 13h8"/></svg></span><b>Web-safe fonts</b><p>Arial and Helvetica look the same everywhere. Web fonts fall back to Times in Outlook.</p></li>
+          <li class="why-card reveal" data-tilt="8"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18h16M6 18V9M10 18V5M14 18v-7M18 18v-4"/></svg></span><b>Under Gmail's limit</b><p>Gmail refuses signatures over 10,000 characters. The meter keeps you inside it.</p></li>
+          <li class="why-card reveal" data-tilt="8"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h10v18H7zM11 18h2"/></svg></span><b>One tap on a phone</b><p>Phone and email are real links: tap to call, tap to write.</p></li>
+          <li class="why-card reveal" data-tilt="8"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"/></svg></span><b>Visible in dark mode</b><p>The logo sits on a solid circle, so it doesn't vanish in a dark inbox.</p></li>
         </ul>
       </div>
     </section>
@@ -265,5 +265,6 @@
   <script src="app.js"></script>
   <script src="fx.js"></script>
   <script src="motion.js"></script>
+  <script src="pointer.js"></script>
 </body>
 </html>

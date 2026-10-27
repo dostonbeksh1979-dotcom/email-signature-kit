@@ -265,6 +265,9 @@ function setupTabs(list, onSelect) {
     });
   });
   const current = () => tabs.find((t) => t.getAttribute("aria-selected") === "true");
+  // The indicator previews the hovered tab and slides back when the pointer leaves
+  tabs.forEach((tab) => tab.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") place(tab); }));
+  list.addEventListener("pointerleave", () => place(current()));
   window.addEventListener("resize", () => place(current()));
   document.fonts.ready.then(() => place(current()));
   place(current());

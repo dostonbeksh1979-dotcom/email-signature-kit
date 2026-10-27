@@ -68,6 +68,7 @@
   let dpr = 1;
   let particles = [];
   const confetti = [];
+  const sparks = [];
   const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
 
   const hexToRgb = (hex) => {
@@ -117,6 +118,16 @@
       actx.fillStyle = g;
       actx.fillRect(0, 0, aw, ah);
     });
+    // One extra glow follows the pointer, in the accent colour
+    const [r0, g0, b0] = blobs[0].rgb;
+    const px = ((pointer.x + 1) / 2) * aw;
+    const py = ((pointer.y + 1) / 2) * ah;
+    const pr = .32 * Math.max(aw, ah);
+    const pg = actx.createRadialGradient(px, py, 0, px, py, pr);
+    pg.addColorStop(0, `rgba(${r0},${g0},${b0},.38)`);
+    pg.addColorStop(1, `rgba(${r0},${g0},${b0},0)`);
+    actx.fillStyle = pg;
+    actx.fillRect(0, 0, aw, ah);
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     ctx.drawImage(aurora, 0, 0, canvas.width, canvas.height);
@@ -156,6 +167,48 @@
     }
   }
 
+  // Small glowing sparks left along the pointer's path
+  function drawSparks(dt) {
+    for (let i = sparks.length - 1; i >= 0; i -= 1) {
+      const s = sparks[i];
+      s.life -= dt;
+      if (s.life <= 0) { sparks.splice(i, 1); continue; }
+      s.x += s.vx * dt;
+      s.y += s.vy * dt;
+      const k = s.life / s.max;
+      ctx.fillStyle = s.color;
+      // A faint wide circle under a bright small one reads as glow, without canvas shadowBlur (slow)
+      ctx.globalAlpha = k * .18;
+      ctx.beginPath();
+      ctx.arc(s.x * dpr, s.y * dpr, s.r * 3.2 * k * dpr, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = k * .95;
+      ctx.beginPath();
+      ctx.arc(s.x * dpr, s.y * dpr, s.r * k * dpr, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function spark(x, y) {
+    if (tier !== "ultra" || sparks.length > 120) return;
+    const glow = `rgb(${blobs[0].rgb.join(",")})`;
+    const colors = [glow, "#a78bfa", "#f472b6", "#ffffff"];
+    for (let i = 0; i < 2; i += 1) {
+      const life = .55 + Math.random() * .4;
+      sparks.push({
+        x: x + (Math.random() - .5) * 6,
+        y: y + (Math.random() - .5) * 6,
+        vx: (Math.random() - .5) * 40,
+        vy: -15 - Math.random() * 35,
+        r: 1.4 + Math.random() * 2,
+        life,
+        max: life,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+  }
+
   // Confetti from a point on screen (used when copying); Lite skips it
   function burst(x, y) {
     if (tier !== "ultra") return;
@@ -189,6 +242,7 @@
       const maxScroll = Math.max(1, document.documentElement.scrollHeight - H);
       drawAurora(now / 1000, window.scrollY / maxScroll);
       drawParticles(dt);
+      drawSparks(dt);
       drawConfetti(dt);
       heroCards.style.setProperty("--px", pointer.x.toFixed(3));
       heroCards.style.setProperty("--py", pointer.y.toFixed(3));
@@ -253,6 +307,7 @@
     heroCards.style.removeProperty("--px");
     heroCards.style.removeProperty("--py");
     confetti.length = 0;
+    sparks.length = 0;
   }
 
   // ---- Scroll reveal and count-up (both tiers; skipped for reduced motion) ----
@@ -290,7 +345,7 @@
   }
 
   window.addEventListener("resize", () => { if (tier === "ultra") resize(); });
-  window.FX = { burst };
+  window.FX = { burst, spark };
 
   let saved = null;
   try { saved = localStorage.getItem("sigkit-quality"); } catch (e) { /* ignore */ }
