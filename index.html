@@ -1,153 +1,192 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="q-ultra">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Email Signature Kit — HTML signatures for Gmail, Apple Mail and Outlook</title>
-  <meta name="description" content="Fill in your details, pick a design and copy an HTML email signature that displays correctly in Gmail, Apple Mail, iPhone and Outlook.">
+  <title>Signature Kit — HTML email signatures that don't break</title>
+  <meta name="description" content="Build an HTML email signature that displays correctly in Gmail, Apple Mail, iPhone and Outlook. Three designs, live preview, one-click copy.">
+  <meta name="theme-color" content="#070b14">
   <link rel="icon" href="img/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="bg-static" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <div class="wrap header-row">
-      <p class="brand"><img src="img/logo.png" width="28" height="28" alt=""> Email Signature Kit</p>
-      <a class="header-link" href="#install">How to install</a>
+      <a class="brand" href="#top"><img src="img/logo.png" width="30" height="30" alt=""> <span>Signature Kit</span></a>
+      <nav class="nav" aria-label="Main">
+        <a href="#builder">Builder</a>
+        <a href="#install">Install</a>
+        <a href="#why">Why it works</a>
+      </nav>
+      <div class="quality" role="group" aria-label="Animation quality">
+        <span class="fps" id="fps" aria-live="off">— fps</span>
+        <button type="button" data-q="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-q="ultra" aria-pressed="false">Ultra</button>
+        <button type="button" data-q="lite" aria-pressed="false">Lite</button>
+      </div>
     </div>
   </header>
 
-  <main id="main" class="wrap">
-    <section class="intro">
-      <h1>Email signatures that don't break</h1>
-      <p class="lead">Fill in your details, pick a design and copy it. Built the way email clients need it, so it looks the same in Gmail, Apple Mail, iPhone and Outlook.</p>
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="chip in-1">Gmail · Apple Mail · iPhone · Outlook</p>
+          <h1 class="in-2">Email signatures that <span class="grad-text">don't break.</span></h1>
+          <p class="lead in-3">Fill in your details, pick a design and copy it. Built the way email clients need it, so your signature looks the same in every inbox, light or dark.</p>
+          <div class="hero-actions in-4">
+            <a class="btn magnetic" href="#builder"><span>Build yours</span></a>
+            <a class="btn btn-glass magnetic" href="#install"><span>How to install</span></a>
+          </div>
+          <ul class="hero-stats in-5">
+            <li><strong data-count="3">3</strong><span>designs</span></li>
+            <li><strong data-count="4">4</strong><span>email apps</span></li>
+            <li><strong data-count="10000" data-suffix="">10,000</strong><span>char limit checked</span></li>
+          </ul>
+        </div>
+        <div class="hero-cards" aria-hidden="true">
+          <div class="mini-card mc-1"><div data-mini="classic"></div></div>
+          <div class="mini-card mc-2"><div data-mini="modern"></div></div>
+          <div class="mini-card mc-3"><div data-mini="minimal"></div></div>
+        </div>
+      </div>
     </section>
 
-    <div class="builder">
-      <!-- Details -->
-      <form class="panel details" id="details" novalidate aria-labelledby="details-title">
-        <h2 id="details-title">Your details</h2>
-        <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" type="text" autocomplete="name" value="Malika Rahimova"></div>
-        <div class="field"><label for="f-title">Job title</label><input id="f-title" name="title" type="text" autocomplete="organization-title" value="Head of Admissions"></div>
-        <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" type="text" autocomplete="organization" value="Ravon Academy"></div>
-        <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" value="+1 (202) 555-0147"></div>
-        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" value="malika@example.com"></div>
-        <div class="field"><label for="f-website">Website</label><input id="f-website" name="website" type="text" inputmode="url" value="www.example.com"></div>
-        <div class="field"><label for="f-cta">Button text <span class="opt">(Modern design)</span></label><input id="f-cta" name="cta" type="text" value="Book a free trial lesson"></div>
-        <div class="field"><label for="f-cta-link">Button link</label><input id="f-cta-link" name="ctaLink" type="text" inputmode="url" value="https://dostonbeksh1979-dotcom.github.io/ravon-academy/#enroll"></div>
-
-        <fieldset class="field">
-          <legend>Accent colour</legend>
-          <div class="swatches">
-            <label class="swatch" style="--c:#0d7f7d"><input type="radio" name="accent" value="#0d7f7d" checked><span class="sr-only">Teal</span></label>
-            <label class="swatch" style="--c:#1f5a43"><input type="radio" name="accent" value="#1f5a43"><span class="sr-only">Green</span></label>
-            <label class="swatch" style="--c:#3d4fa3"><input type="radio" name="accent" value="#3d4fa3"><span class="sr-only">Indigo</span></label>
-            <label class="swatch" style="--c:#c4462b"><input type="radio" name="accent" value="#c4462b"><span class="sr-only">Coral</span></label>
-            <label class="swatch" style="--c:#222222"><input type="radio" name="accent" value="#222222"><span class="sr-only">Black</span></label>
-            <label class="swatch swatch-custom"><input type="color" id="f-custom" value="#7a3fb0" aria-label="Custom colour"></label>
-          </div>
-        </fieldset>
-        <label class="check"><input type="checkbox" id="f-logo" checked> Show logo</label>
-      </form>
-
-      <!-- Preview -->
-      <section class="panel preview" aria-labelledby="preview-title">
-        <div class="preview-top">
-          <h2 id="preview-title">Preview</h2>
-          <div class="seg" role="group" aria-label="Preview background">
-            <button type="button" data-mode="light" aria-pressed="true">Light</button>
-            <button type="button" data-mode="dark" aria-pressed="false">Dark mode</button>
-          </div>
+    <!-- Builder -->
+    <section class="builder-section" id="builder" aria-labelledby="builder-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Builder</p>
+          <h2 id="builder-title">Type once. Copy everywhere.</h2>
         </div>
 
-        <div class="tabs" role="tablist" aria-label="Signature design">
-          <button type="button" role="tab" id="tab-classic" aria-selected="true" aria-controls="mail" data-design="classic">Classic</button>
-          <button type="button" role="tab" id="tab-modern" aria-selected="false" aria-controls="mail" data-design="modern" tabindex="-1">Modern</button>
-          <button type="button" role="tab" id="tab-minimal" aria-selected="false" aria-controls="mail" data-design="minimal" tabindex="-1">Minimal</button>
-        </div>
+        <div class="builder">
+          <form class="panel glass details reveal" id="details" novalidate aria-labelledby="details-title">
+            <h3 id="details-title">Your details</h3>
+            <div class="field"><input id="f-name" name="name" type="text" autocomplete="name" value="Malika Rahimova" placeholder=" "><label for="f-name">Full name</label></div>
+            <div class="field"><input id="f-title" name="title" type="text" autocomplete="organization-title" value="Head of Admissions" placeholder=" "><label for="f-title">Job title</label></div>
+            <div class="field"><input id="f-company" name="company" type="text" autocomplete="organization" value="Ravon Academy" placeholder=" "><label for="f-company">Company</label></div>
+            <div class="row2">
+              <div class="field"><input id="f-phone" name="phone" type="tel" autocomplete="tel" value="+1 (202) 555-0147" placeholder=" "><label for="f-phone">Phone</label></div>
+              <div class="field"><input id="f-website" name="website" type="text" inputmode="url" value="www.example.com" placeholder=" "><label for="f-website">Website</label></div>
+            </div>
+            <div class="field"><input id="f-email" name="email" type="email" autocomplete="email" value="malika@example.com" placeholder=" "><label for="f-email">Email</label></div>
+            <div class="field"><input id="f-cta" name="cta" type="text" value="Book a free trial lesson" placeholder=" "><label for="f-cta">Button text (Modern design)</label></div>
+            <div class="field"><input id="f-cta-link" name="ctaLink" type="text" inputmode="url" value="https://dostonbeksh1979-dotcom.github.io/ravon-academy/#enroll" placeholder=" "><label for="f-cta-link">Button link</label></div>
 
-        <div class="mail" id="mail" role="tabpanel" aria-labelledby="tab-classic">
-          <div class="mail-head">
-            <p><span>From</span> <b data-out="from">Malika Rahimova &lt;malika@example.com&gt;</b></p>
-            <p><span>Subject</span> Your trial lesson is booked</p>
-          </div>
-          <div class="mail-body">
-            <p>Hi Sarah,</p>
-            <p>Thanks for booking a trial lesson. See you on Thursday at 18:30.</p>
-            <p>Best regards,</p>
-            <div class="sig-scroll"><div id="sig-render"></div></div>
-          </div>
-        </div>
+            <fieldset class="swatch-set">
+              <legend>Accent colour</legend>
+              <div class="swatches">
+                <label class="swatch" style="--c:#14b8a6"><input type="radio" name="accent" value="#0d7f7d" data-glow="#14b8a6" checked><span class="sr-only">Teal</span></label>
+                <label class="swatch" style="--c:#6d5efc"><input type="radio" name="accent" value="#4f46e5" data-glow="#6d5efc"><span class="sr-only">Indigo</span></label>
+                <label class="swatch" style="--c:#f05252"><input type="radio" name="accent" value="#c4462b" data-glow="#f05252"><span class="sr-only">Coral</span></label>
+                <label class="swatch" style="--c:#22c55e"><input type="radio" name="accent" value="#1f7a4d" data-glow="#22c55e"><span class="sr-only">Green</span></label>
+                <label class="swatch" style="--c:#e5e7eb"><input type="radio" name="accent" value="#222222" data-glow="#cbd5e1"><span class="sr-only">Black</span></label>
+                <label class="swatch swatch-custom"><input type="color" id="f-custom" value="#d946ef" aria-label="Custom colour"></label>
+              </div>
+            </fieldset>
+            <label class="toggle"><input type="checkbox" id="f-logo" checked><span class="track" aria-hidden="true"></span> Show logo</label>
+          </form>
 
-        <div class="actions">
-          <button class="btn" type="button" id="copy-sig">Copy signature</button>
-          <button class="btn btn-ghost" type="button" id="copy-html">Copy HTML code</button>
-        </div>
-        <p class="status" id="status" role="status" aria-live="polite"></p>
+          <section class="panel glass preview reveal" aria-labelledby="preview-title">
+            <div class="preview-top">
+              <h3 id="preview-title">Live preview</h3>
+              <div class="seg" role="group" aria-label="Preview background">
+                <button type="button" data-mode="light" aria-pressed="true">Light</button>
+                <button type="button" data-mode="dark" aria-pressed="false">Dark inbox</button>
+              </div>
+            </div>
 
-        <details class="code">
-          <summary>View HTML <span class="count" id="count"></span></summary>
-          <pre><code id="code"></code></pre>
-        </details>
-      </section>
-    </div>
+            <div class="tabs" role="tablist" aria-label="Signature design">
+              <span class="tab-ind" aria-hidden="true"></span>
+              <button type="button" role="tab" id="tab-classic" aria-selected="true" aria-controls="mail" data-design="classic">Classic</button>
+              <button type="button" role="tab" id="tab-modern" aria-selected="false" aria-controls="mail" data-design="modern" tabindex="-1">Modern</button>
+              <button type="button" role="tab" id="tab-minimal" aria-selected="false" aria-controls="mail" data-design="minimal" tabindex="-1">Minimal</button>
+            </div>
+
+            <div class="mail-stage" id="stage">
+              <div class="mail" id="mail" role="tabpanel" aria-labelledby="tab-classic">
+                <div class="mail-bar" aria-hidden="true"><i></i><i></i><i></i><span>New message</span></div>
+                <div class="mail-head">
+                  <p><span>From</span> <b data-out="from">Malika Rahimova &lt;malika@example.com&gt;</b></p>
+                  <p><span>Subject</span> Your trial lesson is booked</p>
+                </div>
+                <div class="mail-body">
+                  <p>Hi Sarah,</p>
+                  <p>Thanks for booking a trial lesson. See you on Thursday at 18:30.</p>
+                  <p>Best regards,</p>
+                  <div class="sig-scroll"><div id="sig-render"></div></div>
+                </div>
+                <span class="glare" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn magnetic" type="button" id="copy-sig"><span>Copy signature</span></button>
+              <button class="btn btn-glass magnetic" type="button" id="copy-html"><span>Copy HTML code</span></button>
+            </div>
+            <p class="status" id="status" role="status" aria-live="polite"></p>
+
+            <div class="meter">
+              <div class="meter-row"><span>Gmail size limit</span><span id="count">0 / 10,000</span></div>
+              <div class="meter-bar"><i id="meter-fill"></i></div>
+            </div>
+
+            <details class="code">
+              <summary>View HTML</summary>
+              <pre><code id="code"></code></pre>
+            </details>
+          </section>
+        </div>
+      </div>
+    </section>
 
     <!-- Install -->
     <section class="install" id="install" aria-labelledby="install-title">
-      <h2 id="install-title">How to install</h2>
-      <p class="section-sub">Press <b>Copy signature</b> first, then follow the steps for your email app.</p>
-      <div class="guides">
-        <details open>
-          <summary>Gmail</summary>
-          <ol>
-            <li>Open Gmail, click the gear icon, then <b>See all settings</b>.</li>
-            <li>On the <b>General</b> tab, scroll to <b>Signature</b> and click <b>Create new</b>.</li>
-            <li>Paste into the box (Ctrl+V or Cmd+V).</li>
-            <li>Under <b>Signature defaults</b>, choose it for new emails and replies.</li>
-            <li>Scroll to the bottom and click <b>Save Changes</b>.</li>
-          </ol>
-        </details>
-        <details>
-          <summary>Apple Mail (Mac)</summary>
-          <ol>
-            <li>Open Mail, then <b>Mail → Settings → Signatures</b>.</li>
-            <li>Select your account and click <b>+</b>.</li>
-            <li>Untick <b>Always match my default message font</b>, otherwise Mail removes the formatting.</li>
-            <li>Paste into the right-hand box and close the window.</li>
-            <li>If the logo shows as a question mark, check that you're online: the logo loads from the web, so it isn't sent as an attachment.</li>
-          </ol>
-        </details>
-        <details>
-          <summary>iPhone and iPad</summary>
-          <ol>
-            <li>Open this page on your iPhone and tap <b>Copy signature</b>.</li>
-            <li>Go to <b>Settings → Apps → Mail → Signature</b> and paste.</li>
-            <li>If the formatting disappears, shake the iPhone straight after pasting and tap <b>Undo</b>. The formatted version comes back.</li>
-          </ol>
-        </details>
-        <details>
-          <summary>Outlook (new Outlook and outlook.com)</summary>
-          <ol>
-            <li>Open <b>Settings → Account → Signatures</b>.</li>
-            <li>Click <b>New signature</b>, give it a name and paste.</li>
-            <li>Choose it as the default for new messages and replies, then <b>Save</b>.</li>
-          </ol>
-        </details>
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Install</p>
+          <h2 id="install-title">Paste it in under a minute</h2>
+          <p class="sub">Press <b>Copy signature</b>, then pick your email app.</p>
+        </div>
+        <div class="panel glass install-card reveal">
+          <div class="app-tabs" role="tablist" aria-label="Email app">
+            <span class="app-ind" aria-hidden="true"></span>
+            <button type="button" role="tab" aria-selected="true" aria-controls="steps" data-app="gmail" id="app-gmail">Gmail</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="steps" data-app="apple" id="app-apple" tabindex="-1">Apple Mail</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="steps" data-app="iphone" id="app-iphone" tabindex="-1">iPhone</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="steps" data-app="outlook" id="app-outlook" tabindex="-1">Outlook</button>
+          </div>
+          <ol class="steps" id="steps" role="tabpanel" aria-labelledby="app-gmail"></ol>
+        </div>
       </div>
     </section>
 
     <!-- Why -->
-    <section class="why" aria-labelledby="why-title">
-      <h2 id="why-title">Why these signatures don't break</h2>
-      <ul class="why-list">
-        <li><b>Tables and inline styles.</b> It's the one layout method every email client agrees on. No flexbox, no CSS classes for Outlook to strip.</li>
-        <li><b>A hosted logo, not an attachment.</b> The PNG loads from the web with a fixed size, so it doesn't arrive as a file or blow up on phones.</li>
-        <li><b>Web-safe fonts.</b> Arial and Helvetica look the same everywhere; custom web fonts fall back to Times New Roman in Outlook.</li>
-        <li><b>Under Gmail's limit.</b> Gmail refuses signatures over 10,000 characters. The counter above keeps you inside it.</li>
-        <li><b>Tap to call and tap to email.</b> Phone and email are real links, so they work on a phone with one tap.</li>
-        <li><b>Visible in dark mode.</b> The logo sits on a solid circle, so it doesn't disappear when the inbox turns dark.</li>
-      </ul>
+    <section class="why" id="why" aria-labelledby="why-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Why it works</p>
+          <h2 id="why-title">Built for how email really renders</h2>
+        </div>
+        <ul class="why-grid">
+          <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 10h18M9 10v9"/></svg></span><b>Tables and inline styles</b><p>The one layout every email client agrees on. No flexbox, no classes for Outlook to strip.</p></li>
+          <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 16l4-4 3 3 5-6 4 5M4 4h16v16H4z"/></svg></span><b>Hosted logo, not an attachment</b><p>A PNG with a fixed size loads from the web, so it never arrives as a file.</p></li>
+          <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19L11 5h2l6 14M8 13h8"/></svg></span><b>Web-safe fonts</b><p>Arial and Helvetica look the same everywhere. Web fonts fall back to Times in Outlook.</p></li>
+          <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18h16M6 18V9M10 18V5M14 18v-7M18 18v-4"/></svg></span><b>Under Gmail's limit</b><p>Gmail refuses signatures over 10,000 characters. The meter keeps you inside it.</p></li>
+          <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h10v18H7zM11 18h2"/></svg></span><b>One tap on a phone</b><p>Phone and email are real links: tap to call, tap to write.</p></li>
+          <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"/></svg></span><b>Visible in dark mode</b><p>The logo sits on a solid circle, so it doesn't vanish in a dark inbox.</p></li>
+        </ul>
+      </div>
     </section>
   </main>
 
@@ -158,5 +197,6 @@
   </footer>
 
   <script src="app.js"></script>
+  <script src="fx.js"></script>
 </body>
 </html>
