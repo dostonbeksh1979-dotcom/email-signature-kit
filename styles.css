@@ -103,15 +103,19 @@ a { color: inherit; }
 
 /* Floating signature cards in the hero */
 .hero-cards { position: relative; height: 430px; perspective: 1200px; }
+/* --px/--py follow the pointer; --hs (0–1) grows as the hero scrolls away and fans the cards out */
 .mini-card {
   position: absolute; width: min(400px, 92%); padding: 20px 22px; border-radius: 18px; background: #fff;
   box-shadow: 0 30px 70px -20px rgba(0, 0, 0, .65), 0 0 0 1px rgba(255, 255, 255, .1);
-  transform: translate3d(calc(var(--px, 0) * var(--d)), calc(var(--py, 0) * var(--d)), 0) rotate(var(--r));
+  transform:
+    translate3d(calc(var(--px, 0) * var(--d) + var(--hs, 0) * var(--fx)), calc(var(--py, 0) * var(--d) + var(--hs, 0) * var(--fy)), 0)
+    rotate(calc(var(--r) + var(--hs, 0) * var(--fr)));
   transition: transform .5s var(--ease);
 }
-.mc-1 { --r: -6deg; --d: 18px; top: 0; left: 0; }
-.mc-2 { --r: 4deg; --d: 30px; top: 140px; right: 0; z-index: 2; }
-.mc-3 { --r: -2deg; --d: 12px; top: 300px; left: 8%; }
+.mc-1 { --r: -6deg; --d: 18px; --fx: -90px; --fy: -40px; --fr: -10deg; top: 0; left: 0; }
+.mc-2 { --r: 4deg; --d: 30px; --fx: 110px; --fy: 30px; --fr: 9deg; top: 140px; right: 0; z-index: 2; }
+.mc-3 { --r: -2deg; --d: 12px; --fx: -40px; --fy: 120px; --fr: -6deg; top: 300px; left: 8%; }
+.q-ultra .hero-copy { translate: 0 calc(var(--hs, 0) * 110px); opacity: calc(1 - var(--hs, 0) * .85); }
 .q-ultra .mini-card { animation: float 7s ease-in-out infinite alternate; }
 .q-ultra .mc-2 { animation-duration: 8s; animation-delay: -2s; }
 .q-ultra .mc-3 { animation-duration: 6s; animation-delay: -4s; }
@@ -193,6 +197,12 @@ a { color: inherit; }
 }
 
 .mail-stage { perspective: 1400px; }
+/* The mail window tilts up into place as the builder scrolls in (--enter goes 0 → 1) */
+.q-ultra .preview .mail-stage {
+  transform: perspective(1200px) rotateX(calc((1 - var(--enter, 1)) * 22deg)) scale(calc(.92 + var(--enter, 1) * .08));
+  transform-origin: 50% 100%;
+  opacity: calc(.35 + var(--enter, 1) * .65);
+}
 .mail {
   position: relative; overflow: hidden; border-radius: 16px; background: #fff; color: #222;
   box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .8), 0 0 0 1px rgba(255, 255, 255, .1), 0 0 60px -20px color-mix(in srgb, var(--glow) 60%, transparent);
@@ -270,23 +280,27 @@ a { color: inherit; }
 .steps li {
   counter-increment: s; position: relative; padding: 14px 16px 14px 58px; border: 1px solid rgba(255, 255, 255, .07); border-radius: 14px;
   background: rgba(255, 255, 255, .03); color: var(--muted);
-  animation: step-in .55s var(--ease) both; animation-delay: calc(var(--i) * 70ms);
 }
+.js .steps li { opacity: 0; }
+.steps.play li { animation: step-in .6s var(--ease) forwards; animation-delay: calc(var(--i) * 80ms); }
 .steps li::before {
   content: counter(s); position: absolute; left: 14px; top: 50%; translate: 0 -50%;
   display: grid; place-items: center; width: 30px; height: 30px; border-radius: 10px;
   background: linear-gradient(135deg, var(--glow), var(--violet)); color: #fff; font-family: var(--head); font-size: 14px; font-weight: 700;
 }
 .steps b { color: var(--ink); }
-@keyframes step-in { from { opacity: 0; transform: translateX(-16px); } }
+@keyframes step-in { from { opacity: 0; transform: translateX(-22px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
 
 /* Why */
 .why-grid { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0; padding: 0; }
 .why-card {
   position: relative; padding: 24px; border: 1px solid var(--border); border-radius: 18px; background: var(--glass);
-  transition: transform .4s var(--ease), border-color .4s, opacity .9s var(--ease), background .4s;
+  transition: transform 1s var(--ease), translate .4s var(--ease), border-color .4s, opacity 1s var(--ease), filter 1s var(--ease), background .4s;
 }
-.why-card:hover { transform: translateY(-6px); border-color: color-mix(in srgb, var(--glow) 60%, transparent); background: var(--glass-strong); }
+.why-card:hover { translate: 0 -6px; border-color: color-mix(in srgb, var(--glow) 60%, transparent); background: var(--glass-strong); }
+/* Cards flip up into place as they scroll in */
+.js .why-card.reveal { transform: perspective(900px) rotateX(-28deg) translateY(50px) scale(.96); transform-origin: 50% 100%; filter: blur(6px); }
+.js .why-card.reveal.in { transform: none; filter: none; }
 .why-card b { display: block; margin: 16px 0 6px; font-family: var(--head); font-size: 17px; }
 .why-card p { color: var(--muted); font-size: 15px; }
 .ico { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; background: linear-gradient(135deg, color-mix(in srgb, var(--glow) 35%, transparent), rgba(124, 92, 255, .3)); border: 1px solid var(--border); }
@@ -294,6 +308,88 @@ a { color: inherit; }
 
 .site-footer { padding: 30px 0 40px; border-top: 1px solid rgba(255, 255, 255, .06); color: var(--muted); font-size: 14px; }
 .site-footer a { color: var(--glow); }
+
+/* Reading progress under the header */
+.read-progress {
+  position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; transform-origin: left; transform: scaleX(var(--rp, 0));
+  background: linear-gradient(90deg, var(--glow), var(--violet), var(--pink)); box-shadow: 0 0 12px var(--glow);
+}
+
+/* Rotating word in the hero chip */
+.rotator { position: relative; display: inline-grid; vertical-align: bottom; height: 1.5em; overflow: hidden; color: var(--ink); font-weight: 700; transition: width .5s var(--spring); }
+.rot-word { grid-area: 1 / 1; white-space: nowrap; }
+.rot-measure { position: absolute; visibility: hidden; }
+.rot-word.enter { animation: rot-in .6s var(--ease) both; }
+.rot-word.leave { animation: rot-out .5s var(--ease) both; }
+@keyframes rot-in { from { transform: translateY(100%); opacity: 0; filter: blur(4px); } }
+@keyframes rot-out { to { transform: translateY(-100%); opacity: 0; filter: blur(4px); } }
+
+/* Split text: hero letters, heading words */
+.is-split .w { display: inline-block; white-space: nowrap; }
+.is-split .ch { display: inline-block; animation: char-in .9s var(--ease) both; animation-delay: calc(var(--i) * 22ms + .1s); }
+@keyframes char-in { from { opacity: 0; transform: translateY(.55em) rotate(10deg) scale(.9); filter: blur(8px); } }
+.grad-text.pre { background: none; color: var(--glow); }
+.is-split .w:has(.wi) { overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
+.is-split .wi { display: inline-block; transform: translateY(115%) rotate(6deg); transition: transform 1s var(--ease); transition-delay: calc(var(--i) * 65ms); }
+.is-split.in .wi { transform: none; }
+
+/* Statement that lights up word by word */
+.statement-section { padding: clamp(60px, 10vw, 130px) 0; }
+.statement { max-width: 980px; font-family: var(--head); font-size: clamp(28px, 4.2vw, 52px); font-weight: 700; line-height: 1.2; letter-spacing: -.025em; }
+.statement em { font-style: normal; }
+.sw { color: rgba(232, 237, 245, .16); transition: color .45s var(--ease), text-shadow .45s; }
+.sw.lit { color: var(--ink); }
+.sw.key.lit { color: var(--glow); text-shadow: 0 0 28px color-mix(in srgb, var(--glow) 60%, transparent); }
+
+/* Inbox tour: pinned while the cards slide sideways */
+.inboxes { position: relative; }
+.pin { padding: clamp(40px, 6vw, 70px) 0 40px; overflow: hidden; }
+.inboxes.is-pinned .pin { position: sticky; top: 66px; min-height: calc(100vh - 66px); display: flex; flex-direction: column; justify-content: center; }
+.inbox-head { margin-bottom: 30px; }
+.inbox-head h2 { margin-top: 10px; font-size: clamp(32px, 4.4vw, 52px); font-weight: 700; }
+.track-viewport { overflow: hidden; }
+.tour-track { display: flex; align-items: flex-start; gap: 28px; width: max-content; padding: 10px max(20px, calc((100vw - 1180px) / 2)) 20px; will-change: transform; }
+.client { flex: 0 0 auto; width: min(540px, 82vw); margin: 0; }
+.client figcaption { margin-top: 14px; color: var(--muted); font-size: 14px; font-weight: 600; }
+.client > .client-chrome, .client > .client-body { background: #fff; color: #222; }
+.client > .client-chrome { border-radius: 16px 16px 0 0; }
+.client > .client-body { border-radius: 0 0 16px 16px; box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .7); }
+.client-chrome { display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px; border-bottom: 1px solid #e6e9ee; font-size: 13px; font-weight: 600; color: #555; }
+.client-body { padding: 18px 20px 24px; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5; }
+.client-body > p + p { margin-top: 8px; }
+.c-subject { font-size: 19px; color: #1f1f1f; margin-bottom: 4px; }
+.c-subject.small { font-size: 14px; color: #555; }
+.c-from { color: #222; }
+.c-from span { color: #888; font-size: 12px; margin-left: 6px; }
+.client-sig { margin-top: 14px; overflow-x: auto; }
+.client-gmail .client-chrome { background: #f6f8fc; }
+.g-logo { color: #ea4335; font-size: 16px; font-weight: 700; }
+.g-search { flex: 1; padding: 7px 14px; border-radius: 999px; background: #eaf1fb; color: #5f6368; font-weight: 400; }
+.g-avatar { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #7c4dff; color: #fff; }
+.client-apple .client-chrome { background: #ececec; }
+.client-apple .client-chrome i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+.client-apple .client-chrome i:nth-child(2) { background: #febc2e; }
+.client-apple .client-chrome i:nth-child(3) { background: #28c840; margin-right: 8px; }
+.client-iphone { width: 300px; }
+.phone { overflow: hidden; border: 10px solid #0f0f10; border-radius: 42px; background: #fff; color: #222; box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .8), 0 0 0 1px rgba(255, 255, 255, .15); }
+.phone-top { display: flex; justify-content: space-between; align-items: center; height: 38px; padding: 0 20px; font-family: var(--body); font-size: 13px; font-weight: 700; color: #111; }
+.notch { width: 86px; height: 22px; border-radius: 0 0 14px 14px; background: #0f0f10; margin-top: -14px; }
+.client-iphone .client-body { font-size: 15px; padding: 10px 16px 30px; }
+.client-outlook > .client-chrome { background: #262626; border-color: #3a3a3a; color: #ddd; }
+.client-outlook > .client-body { background: #1f1f1f; color: #e3e3e3; }
+.client-outlook .c-subject, .client-outlook .c-from { color: #f0f0f0; }
+.o-logo { color: #4ea1ff; font-size: 15px; font-weight: 700; }
+.o-tag { padding: 3px 10px; border-radius: 999px; background: #333; color: #bbb; font-weight: 500; }
+.client-outlook .client-sig { filter: invert(1) hue-rotate(180deg); }
+.client-outlook .client-sig img { filter: invert(1) hue-rotate(180deg); }
+.track-dots { list-style: none; display: flex; justify-content: center; gap: 8px; margin: 10px 0 0; padding: 0; }
+.track-dots li { padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-size: 13px; font-weight: 600; transition: background .35s, color .35s, border-color .35s; }
+.track-dots li.on { background: color-mix(in srgb, var(--glow) 25%, transparent); border-color: var(--glow); color: var(--ink); }
+/* Without pinning (phones, reduced motion) the tour is a normal swipe row */
+.inboxes:not(.is-pinned) .track-viewport { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.inboxes:not(.is-pinned) .track-viewport::-webkit-scrollbar { display: none; }
+.inboxes:not(.is-pinned) .client { scroll-snap-align: center; }
+.inboxes:not(.is-pinned) .track-dots { display: none; }
 
 /* Responsive */
 @media (max-width: 1040px) {
@@ -329,5 +425,6 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .js .reveal { opacity: 1; transform: none; }
+  .js .reveal, .js .why-card.reveal { opacity: 1; transform: none; filter: none; }
+  .js .steps li { opacity: 1; }
 }

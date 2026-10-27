@@ -133,6 +133,7 @@ function update() {
   meterFill.style.setProperty("--v", Math.min(n / GMAIL_LIMIT, 1).toFixed(3));
   meter.classList.toggle("is-over", n > GMAIL_LIMIT);
   document.querySelector('[data-out="from"]').textContent = v.email ? `${v.name} <${v.email}>` : v.name;
+  document.querySelectorAll("[data-client-sig]").forEach((el) => { el.innerHTML = html; });
   renderMinis(v);
 }
 

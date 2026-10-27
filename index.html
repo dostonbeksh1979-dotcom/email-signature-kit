@@ -33,6 +33,7 @@
         <button type="button" data-q="lite" aria-pressed="false">Lite</button>
       </div>
     </div>
+    <span class="read-progress" aria-hidden="true"></span>
   </header>
 
   <main id="main">
@@ -40,8 +41,8 @@
     <section class="hero" id="top">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="chip in-1">Gmail · Apple Mail · iPhone · Outlook</p>
-          <h1 class="in-2">Email signatures that <span class="grad-text">don't break.</span></h1>
+          <p class="chip in-1"><span class="sr-only">Looks right in Gmail, Apple Mail, iPhone and Outlook</span><span aria-hidden="true">Looks right in <span class="rotator"><span class="rot-word">Gmail</span></span></span></p>
+          <h1 data-split="chars">Email signatures that <span class="grad-text">don't break.</span></h1>
           <p class="lead in-3">Fill in your details, pick a design and copy it. Built the way email clients need it, so your signature looks the same in every inbox, light or dark.</p>
           <div class="hero-actions in-4">
             <a class="btn magnetic" href="#builder"><span>Build yours</span></a>
@@ -61,12 +62,19 @@
       </div>
     </section>
 
+    <!-- Statement: words light up as you scroll -->
+    <section class="statement-section" aria-label="Why signatures usually break">
+      <div class="wrap">
+        <p class="statement" data-scrub>Most signatures look fine when you send them. Then <em>Outlook</em> strips the styles, <em>Gmail</em> drops the logo and the <em>iPhone</em> turns it into plain text. This one is built so none of that happens.</p>
+      </div>
+    </section>
+
     <!-- Builder -->
     <section class="builder-section" id="builder" aria-labelledby="builder-title">
       <div class="wrap">
-        <div class="section-head reveal">
-          <p class="eyebrow">Builder</p>
-          <h2 id="builder-title">Type once. Copy everywhere.</h2>
+        <div class="section-head">
+          <p class="eyebrow" data-scramble>Builder</p>
+          <h2 id="builder-title" data-split="words">Type once. Copy everywhere.</h2>
         </div>
 
         <div class="builder">
@@ -150,12 +158,70 @@
       </div>
     </section>
 
+    <!-- Inbox tour: pinned while the cards slide sideways -->
+    <section class="inboxes" id="inboxes" aria-labelledby="inboxes-title">
+      <div class="pin">
+        <div class="wrap inbox-head">
+          <p class="eyebrow" data-scramble>Every inbox</p>
+          <h2 id="inboxes-title" data-split="words">Same signature. Four email apps.</h2>
+          <p class="sub">Your signature as Gmail, Apple Mail, iPhone and Outlook in dark mode show it. It updates as you type above.</p>
+        </div>
+        <div class="track-viewport">
+          <div class="tour-track" id="track">
+            <figure class="client client-gmail">
+              <div class="client-chrome"><span class="g-logo">Gmail</span><span class="g-search">Search mail</span><span class="g-avatar">S</span></div>
+              <div class="client-body">
+                <p class="c-subject">Your trial lesson is booked</p>
+                <p class="c-from"><b>Malika Rahimova</b> <span>to me</span></p>
+                <p>Hi Sarah,</p><p>See you on Thursday at 18:30.</p><p>Best regards,</p>
+                <div class="client-sig" data-client-sig></div>
+              </div>
+              <figcaption>Gmail · web</figcaption>
+            </figure>
+            <figure class="client client-apple">
+              <div class="client-chrome"><i></i><i></i><i></i><span>Inbox — iCloud</span></div>
+              <div class="client-body">
+                <p class="c-from"><b>Malika Rahimova</b></p>
+                <p class="c-subject small">Your trial lesson is booked</p>
+                <p>Hi Sarah,</p><p>See you on Thursday at 18:30.</p><p>Best regards,</p>
+                <div class="client-sig" data-client-sig></div>
+              </div>
+              <figcaption>Apple Mail · Mac</figcaption>
+            </figure>
+            <figure class="client client-iphone">
+              <div class="phone">
+                <div class="phone-top"><span>9:41</span><span class="notch"></span><span>5G</span></div>
+                <div class="client-body">
+                  <p class="c-from"><b>Malika Rahimova</b></p>
+                  <p class="c-subject small">Your trial lesson is booked</p>
+                  <p>Hi Sarah,</p><p>See you on Thursday at 18:30.</p><p>Best regards,</p>
+                  <div class="client-sig" data-client-sig></div>
+                </div>
+              </div>
+              <figcaption>Mail · iPhone</figcaption>
+            </figure>
+            <figure class="client client-outlook">
+              <div class="client-chrome"><span class="o-logo">Outlook</span><span class="o-tag">Dark mode</span></div>
+              <div class="client-body">
+                <p class="c-subject">Your trial lesson is booked</p>
+                <p class="c-from"><b>Malika Rahimova</b> <span>malika@example.com</span></p>
+                <p>Hi Sarah,</p><p>See you on Thursday at 18:30.</p><p>Best regards,</p>
+                <div class="client-sig" data-client-sig></div>
+              </div>
+              <figcaption>Outlook · dark mode</figcaption>
+            </figure>
+          </div>
+        </div>
+        <ol class="track-dots" aria-hidden="true"><li class="on">Gmail</li><li>Apple Mail</li><li>iPhone</li><li>Outlook</li></ol>
+      </div>
+    </section>
+
     <!-- Install -->
     <section class="install" id="install" aria-labelledby="install-title">
       <div class="wrap">
-        <div class="section-head reveal">
-          <p class="eyebrow">Install</p>
-          <h2 id="install-title">Paste it in under a minute</h2>
+        <div class="section-head">
+          <p class="eyebrow" data-scramble>Install</p>
+          <h2 id="install-title" data-split="words">Paste it in under a minute</h2>
           <p class="sub">Press <b>Copy signature</b>, then pick your email app.</p>
         </div>
         <div class="panel glass install-card reveal">
@@ -174,9 +240,9 @@
     <!-- Why -->
     <section class="why" id="why" aria-labelledby="why-title">
       <div class="wrap">
-        <div class="section-head reveal">
-          <p class="eyebrow">Why it works</p>
-          <h2 id="why-title">Built for how email really renders</h2>
+        <div class="section-head">
+          <p class="eyebrow" data-scramble>Why it works</p>
+          <h2 id="why-title" data-split="words">Built for how email really renders</h2>
         </div>
         <ul class="why-grid">
           <li class="why-card reveal"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 10h18M9 10v9"/></svg></span><b>Tables and inline styles</b><p>The one layout every email client agrees on. No flexbox, no classes for Outlook to strip.</p></li>
@@ -198,5 +264,6 @@
 
   <script src="app.js"></script>
   <script src="fx.js"></script>
+  <script src="motion.js"></script>
 </body>
 </html>
